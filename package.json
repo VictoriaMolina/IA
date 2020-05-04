@@ -1,0 +1,14 @@
+{
+  "name": "proyectoclase",
+  "version": "1.0.0",
+  "description": "un chat sencillo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Victoria Molina",
+  "license": "ISC",
+  "dependencies": {
+    "languagedetect": "^2.0.0"
+  }
+}
