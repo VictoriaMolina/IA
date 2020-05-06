@@ -4,6 +4,7 @@ var io = require('socket.io')(http);
 const natural = require('natural');
 const LanguageDetect = require('languagedetect');
 const lngDetector = new LanguageDetect();
+var classifier = new natural.BayesClassifier();
 
 
 
@@ -33,19 +34,6 @@ Clase:
 function procesamientoDeTexto(msg){
   	var tokenizer = new natural.WordTokenizer(); 
   	var tokens = tokenizer.tokenize(msg); 
-	
-	/*let newTokens =   [ [ 'english', 0.5969230769230769 ],
-	 [ 'spanish', 0.2597435897435898 ]];
-
-	//Inglés
-	natural.PorterStemmer.attach();
-	tokenizer.tokenizeAndStem();
-
-
-	//Español
-	natural.PorterStemmerEs.attach();
-	tokenizer.tokenizeAndStem();
-*/
 
 		if(LanguageDetect == 'english'){
 			natural.PorterStemmer.attach();
@@ -71,14 +59,29 @@ io.on('connection', (socket) => {
 		}*/
 
 		io.emit('chatmsg', procesamientoDeTexto(msg));
-
-
 	});
-	});
+});
 
+function clasificado(){
+classifier.addDocument('¡Hola!', 'saludos');
+classifier.addDocument('¿Cómo estás?', 'saludos');
+classifier.addDocument('Hago tarea', 'escuela');
+classifier.addDocument('Practico coreano', 'escuela');
+
+classifier.train();
+
+}
+
+classifier.save('classifier.json', function(err, classifier) {
+
+});	
+
+natural.BayesClassifier.load('classifier.json', null, function(err, classifier) {
+});
 
 http.listen(3000, () => {
 	console.log('Server is running ')
+	clasificado();
 });
 
 
