@@ -49,11 +49,12 @@ function procesamientoDeTexto(msg){
 
 		if(LanguageDetect == 'english'){
 			natural.PorterStemmer.attach();
-			tokenizer.tokenizeAndStem();
-		}else (LanguageDetect == 'spanish'){
+			tokens = tokenizer.tokenizeAndStem();
+		}else if(LanguageDetect == 'spanish'){
 			natural.PorterStemmerEs.attach();
-			tokenizer.tokenizeAndStem();
+			tokens = tokenizer.tokenizeAndStem();
 		}
+		return tokens;
 
 }
 
