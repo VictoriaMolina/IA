@@ -5,7 +5,8 @@ const natural = require('natural');
 const LanguageDetect = require('languagedetect');
 const lngDetector = new LanguageDetect();
 var classifier = new natural.BayesClassifier();
-
+var Analyzer = require('natural').SentimentAnalyzer;
+var stemmer = require('natural').PorterStemmer;
 
 
 app.get('/', (req, res) => {
@@ -69,6 +70,9 @@ classifier.addDocument('Hago tarea', 'escuela');
 classifier.addDocument('Practico coreano', 'escuela');
 
 classifier.train();
+
+var analyzer = new Analyzer("Spanish", stemmer, "afinn");
+console.log(analyzer.getSentiment(tokens));
 
 }
 
