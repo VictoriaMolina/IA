@@ -71,17 +71,19 @@ classifier.addDocument('Practico coreano', 'escuela');
 
 classifier.train();
 
-var analyzer = new Analyzer("Spanish", stemmer, "afinn");
-console.log(analyzer.getSentiment(tokens));
-
-}
+/*var analyzer = new Analyzer("Spanish", stemmer, "afinn");
+console.log(analyzer.getSentiment(tokens));*/
 
 classifier.save('classifier.json', function(err, classifier) {
 
 });	
 
+}
+
 natural.BayesClassifier.load('classifier.json', null, function(err, classifier) {
 });
+
+
 
 http.listen(3000, () => {
 	console.log('Server is running ')
